@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tour_pacage_booking',
     'cart',
+    'payment',
     'django_extensions',
     'debug_toolbar',
 #tobe removed later

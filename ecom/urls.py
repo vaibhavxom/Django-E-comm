@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('tour_pacage_booking.urls')),
     path('cart/',include('cart.urls')),
+    path('payment/',include('payment.urls')),
 
     
 ] + static( settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
