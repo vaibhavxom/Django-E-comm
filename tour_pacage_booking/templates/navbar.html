@@ -1,0 +1,64 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'home'%}">Tour Package Booking</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'search' %}">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about'%}">About</a></li>
+                {% if user.is_authenticated%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">Logout</a></li>
+                <li>
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                              <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Profile
+                              </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="{% url 'update_user' %}">User Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update_info' %}">User info</a></li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+                </li>
+                
+                
+
+                {%else%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Login</a></li>
+                {%endif%}
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                        <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                          <li><a class="dropdown-item" href="{% url 'category_summary' %}">All Categories</a></li>
+                          
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                
+            </ul>
+            
+
+           
+            <form class="d-flex">
+                <a href="{% url 'cart_summary' %}" class="btn btn-outline-light" ><i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{cart|length}} </span></a>
+                
+            </form>
+            
+            
+        </div>
+    </div>
+</nav>
+

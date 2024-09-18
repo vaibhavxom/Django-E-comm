@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+                <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Shop cart</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">view your cart</p>
+                </div>
+            </div>
+        </header>
+
+
+        <br/>
+        <main>
+          <article>
+            {%if cart_products%}
+            {% for product in cart_products %}
+
+
+            <div class="card mb-3" >
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src='{{ product.image.url }}' class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                        <center>
+                      <h5 class="card-title">{{product.name}}</h5>
+                      <p class="card-text">{{product.discription}}<br/></p>
+                      {% if product.is_sale%}
+        
+                      &#8377;<!-- quary for product price--> 
+                      <del class ="text-danger" >{{product.price}} </del> &nbsp;
+                      <!--sale_price-->
+                      {{product.sale_price}}  
+                      <br/> 
+                      {%else%}
+                          <!-- Product price-->
+                          <!--sign for rupees code '   &#8337; ' --> &#8377;{{product.price}} <!-- quary for product price-->
+                        <br/> 
+        
+                      {%endif%}
+                      <div class="row justify-content-center">
+                        <div class="col-md-2">Quantity:</div>
+                                    <div class="col-md-2">
+                                    <select class="form-select form-select-sm" id="select{{product.id}}">
+                                      <!--quantity selector logic-->
+                                        {%for key, value in quantities.items %}
+                                        {%if key == product.id|slugify %}
+                                        <option selected> {{ value  }} </option>
+                                        {%endif%}
+                                        {%endfor%}
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                    </select>
+                                    </div>
+                                </div>
+                      <br/>
+                      <a href="{% url 'home'%}" class="btn btn-secondary">HOME</a>
+                      <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart">Update</button>  
+                      <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button>
+                      <br/>
+                        </div>
+                    </div>
+                
+                      <br/>
+                      <br/>
+                     
+                      
+                      
+                        </center>
+                       
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              
+              
+        
+        
+            {% endfor%}
+            <br/><br/>
+            <h3> Total :&#8377; {{total}} </h3>
+
+            <br/><br/>
+            {%else%}
+            <center>  
+
+              <h1><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+              </svg></h1>Nothing In Your Cart.... 
+            </center>
+
+                     
+            {%endif%}
+
+          </article>
+        </main>
+        
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        
+        
+
+        
+
+
+
+
+<script>
+  //update cart 
+  //check if button clicked 
+  $(document).on('click', '.update-cart', function(e){
+    e.preventDefault();
+    // grab the product id
+    var productid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'cart_update' %}',
+    data: {
+      product_id: $(this).data('index'),
+      product_qty: $('#select' + productid + ' option:selected').text(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+        //console.log(json)
+        //document.getElementById("cart_quantity").textContent = json.qty
+        location.reload();
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+
+    });
+
+})
+
+
+  //delete cart 
+  //check if button clicked 
+  $(document).on('click', '.delete-product', function(e){
+    e.preventDefault();
+    // grab the product id
+    var productid = $(this).data('index');
+
+    $.ajax({
+    type: 'POST',
+    url: '{% url 'cart_delete' %}',
+    data: {
+      product_id: $(this).data('index'),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+        //console.log(json)
+        //document.getElementById("cart_quantity").textContent = json.qty
+        location.reload();
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+
+
+    });
+
+})
+  
+  
+  
+  
+  </script>
+
+
+
+{% endblock %}
+  
