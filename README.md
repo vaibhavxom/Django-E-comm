@@ -1,6 +1,6 @@
 # Django-E-comm
 
-
+# git clone {repo url} without quots
 # git status
 # git add -A
 # git commit -m 
