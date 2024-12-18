@@ -1,0 +1,7 @@
+sqlite3 db.sqlite3    #sqlite db
+.table                      # to see all the tables in the db
+select * from auth_user     # to see view of the tables namely username 
+# to change user password using username from db
+
+py manage.py changepassword username ,
+
