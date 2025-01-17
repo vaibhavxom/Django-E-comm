@@ -1,18 +1,56 @@
 {% extends 'base.html' %}
-
+{%load static %}
 {% block content%}
 
                 <!-- Header-->
-        <header class="bg-dark py-5">
+                <style>
+                    /* Custom styles for carousel size */
+                    .carousel {
+                        max-width: 2000px; /* Set a max width for the carousel */
+                        margin: auto; /* Center the carousel */
+                    }
+                    .carousel-item img {
+                        width: 100%; /* Make images responsive */
+                        height: 500px; /* Set a fixed height for images */
+                        object-fit: cover; /* Cover the area while maintaining aspect ratio */
+                    }
+                </style>
+
+        <header class="bg-dark py-2">
             <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                      <img src="{%static '/slider/goa.jpg' %}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{%static '/slider/mumbai.jpg' %}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{%static '/slider/kerla.jpg' %}" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+               <!-- <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
                     <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
+                </div> -->
             </div>
         </header>
+        <!-- to do
+        https://getbootstrap.com/docs/4.0/components/carousel/ 
+        
+        -->
         <!-- Section-->
-        <section class="py-5">
+        <section class="py-2">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 

@@ -1,0 +1,70 @@
+/* styles.css */
+
+/* Base styles for light mode */
+body {
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Dark text */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.navbar {
+    background-color: #f8f9fa; /* Light navbar */
+}
+
+.footer {
+    background-color: #f8f9fa; /* Light footer */
+    color: #000000; /* Dark text in footer */
+}
+
+.card {
+    background-color: #ffffff; /* Light card background */
+    color: #000000; /* Dark text in card */
+}
+
+.table {
+    background-color: #ffffff; /* Light table background */
+    color: #000000; /* Dark text in table */
+}
+
+.table th {
+    background-color: #e9ecef; /* Light table header */
+    color: #000000; /* Dark text in table header */
+}
+
+.table td {
+    border-color: #dee2e6; /* Light table border */
+}
+
+/* Dark Mode Styles */
+body.dark {
+    background-color: #212529; /* Dark background */
+    color: #ffffff; /* Light text */
+}
+
+.navbar.dark {
+    background-color: #343a40; /* Dark navbar */
+}
+
+.footer.dark {
+    background-color: #343a40; /* Dark footer */
+    color: #ffffff; /* Light text in footer */
+}
+
+.card.dark {
+    background-color: #495057; /* Dark card background */
+    color: #ffffff; /* Light text in card */
+}
+
+.table.dark {
+    background-color: #343a40; /* Dark table background */
+    color: #ffffff; /* Light text in table */
+}
+
+.table.dark th {
+    background-color: #495057; /* Dark table header */
+    color: #ffffff; /* Light text in table header */
+}
+
+.table.dark td {
+    border-color: #495057; /* Dark table border */
+}
