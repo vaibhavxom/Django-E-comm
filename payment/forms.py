@@ -14,6 +14,6 @@ class ShippingForm(forms.ModelForm):
 
     class Meta:
         model = ShippingAddress
-        fields = ['shipping_full_name','shipping_email','shipping_address1','shipping_address2','shipping_city','shipping_state','shipping_zipcode','shipping_country']
+        fields = ['Shipping_full_name','Shipping_email','Shipping_address1','Shipping_address2','Shipping_city','Shipping_state','Shipping_zipcode','Shipping_country']
 
         exclude =['user',]    

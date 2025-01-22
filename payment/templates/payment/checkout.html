@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+                <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Checkout</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Review your order</p>
+                </div>
+            </div>
+        </header>
+
+
+        <br/>
+    <main>
+        <article>
+            <br/><br/>
+            <div class="grid text-center d-flex justify-content-center vh-10 ">
+    
+            <div class="md-col-6 offset md-3">
+            
+                <div class="card">
+                    <div class="card-header">
+                      Order Summary
+                    </div>
+                    <div class="card-body">
+                     {% for product in cart_products %}
+                        
+                     {{product.name}}:
+                     <br/>
+                        {% if product.is_sale%}
+                        
+                        {{product.sale_price}}  
+                        
+                        {%else%}
+                        
+                        {{product.price}}
+                        
+                        {%endif%}
+                        <br/><br/>
+                        <small>
+
+                        {%for key, value in quantities.items %}
+                        
+                        {%if key == product.id|slugify %}
+                        
+                       person :  {{ value  }}
+                        
+                        {%endif%}
+                    
+                        {%endfor%}
+                    </small>
+                        <br/><br/>
+
+                     {%endfor%}
+                     Total = {{total}}
+                    </div>
+                  </div>
+
+
+                  <A href="{% url 'payment_success'%}" class="btn btn-secondary">checkout </A>
+
+            </div>
+
+            </div>
+
+
+        </article>
+    </main>
+        
+        <br/><br/><br/><br/><br/><br/><br/>
+
+
+
+{% endblock %}
+  

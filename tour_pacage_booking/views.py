@@ -1,10 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404,render,redirect
 from .models import Category, Product,Profile
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from payment.forms import ShippingForm
+from payment.models import ShippingAddress
 from .forms import SignUpForm,UpdateUserForm,ChangePasswordForm,UserInfoForm
 from django import forms
 from django.db.models import Q
@@ -30,17 +31,30 @@ def search(request):
 
 
 def update_info(request):
-     if request.user.is_authenticated:
-        current_user = Profile.objects.get(user__id=request.user.id)
-        form = UserInfoForm(request.POST or None ,instance=current_user)
-        if form.is_valid():
+    if request.user.is_authenticated:
+        # Get the current user's profile
+        current_user = get_object_or_404(Profile, user__id=request.user.id)
+        
+        # Try to get the current user's shipping info; create a new instance if it doesn't exist
+        shipping_user = ShippingAddress.objects.filter(user__id=request.user.id).first()
+        if not shipping_user:
+            shipping_user = ShippingAddress(user=request.user)  # Create an empty instance linked to the user
+        
+        # Get forms for user info and shipping info
+        form = UserInfoForm(request.POST or None, instance=current_user)
+        shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
+        
+        if request.method == "POST" and form.is_valid() and shipping_form.is_valid():
+            # Save the updated user info and shipping info
             form.save()
+            shipping_form.save()
             
-            messages.success(request,'your info has been updated !!')
+            messages.success(request, 'Your info has been updated!')
             return redirect('home')
-        return render(request,'update_info.html',{'form':form})
-     else:
-        messages.error(request,'you must be loggend in ')
+        
+        return render(request, 'update_info.html', {'form': form, 'shipping_form': shipping_form})
+    else:
+        messages.error(request, 'You must be logged in.')
         return redirect('home')
      
     

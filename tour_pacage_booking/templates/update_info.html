@@ -14,11 +14,17 @@
 <div class="grid text-center d-flex justify-content-center vh-10 align-items-center">
     
     <div class="md-col-6 offset md-3">
+        <br/><br/>
+        <strong> Billing Infomation </strong>
+        <br/><br/>
        <form method="POST" action="{% url 'update_info' %}">
         {% csrf_token %}
 
         {{form.as_p}}
-        <br/>
+        
+        <br/><strong> Billing Address </strong>
+        <br/><br/>
+        {{shipping_form.as_p }}
         <button type="submit" class="btn btn-primary">update info</button>
         
         </form>
@@ -28,5 +34,7 @@
 </div>
 
 <br/><br/>
+
+
 
 {% endblock %}
