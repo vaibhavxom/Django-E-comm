@@ -34,8 +34,8 @@ Make sure you have the following installed:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/django-e-comm.git
-    cd django-e-comm
+    git clone https://github.com/vaibhavxom/Django-E-comm.git
+    cd Django-E-comm
     ```
 
 2. Create a virtual environment (optional but recommended):
@@ -93,9 +93,9 @@ To manage products and view orders, log in to the Django admin panel at:
 **`http://127.0.0.1:8000/admin`**
 
 ## Project Structure
-django-e-comm/                  # Root directory of the project
+Django-E-comm/                  # Root directory of the project
 ```
-├── ecommerce/                   # Main Django app for the e-commerce functionality
+├── ecom/                   # Main Django app for the e-commerce functionality
 │   ├── migrations/              # Directory for database migration files
 │   ├── models.py                # Contains database models for products, orders, etc.
 │   ├── views.py                 # Contains views (logic) that handle requests
@@ -127,11 +127,11 @@ django-e-comm/                  # Root directory of the project
 2. Open a **Bash console** from the dashboard (or the **"Consoles"** tab).
 3. In the bash console, clone your repository:
     ```bash
-    git clone https://github.com/yourusername/django-e-comm.git
+    git clone https://github.com/vaibhavxom/Django-E-comm.git
     ```
 4. Navigate to the project directory:
     ```bash
-    cd django-e-comm
+    cd Django-E-comm
     ```
 
 ### Step 4: Set Up a Virtual Environment
@@ -170,19 +170,19 @@ django-e-comm/                  # Root directory of the project
 
 ### Step 7: Update PythonAnywhere Web App Settings
 1. Go to the **"Web"** tab on PythonAnywhere and click on the web app you created.
-2. Under **"Source code"**, set the path to your project folder (e.g., `/home/yourusername/django-e-comm`).
-3. Under **"Virtualenv"**, set the path to your virtual environment (e.g., `/home/yourusername/django-e-comm/myenv`).
+2. Under **"Source code"**, set the path to your project folder (e.g., `/home/yourusername/Django-E-comm`).
+3. Under **"Virtualenv"**, set the path to your virtual environment (e.g., `/home/yourusername/Django-E-comm/myenv`).
 4. Set the **WSGI configuration file** to point to your Django app:
     - Open the **WSGI configuration file** by clicking on **"WSGI configuration file"** link.
     - Add the following code:
     ```python
     import os
     import sys
-    path = '/home/yourusername/django-e-comm'
+    path = '/home/yourusername/Django-E-comm'
     if path not in sys.path:
         sys.path.insert(0, path)
 
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'ecommerce.settings'
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'ecom.settings'
 
     from django.core.wsgi import get_wsgi_application
     application = get_wsgi_application()
@@ -191,12 +191,12 @@ django-e-comm/                  # Root directory of the project
     - In the **"Static files"** section, configure the static and media file paths as follows:
     ```text
     URL: /static/
-    Directory: /home/yourusername/django-e-comm/static/
+    Directory: /home/yourusername/Django-E-comm/static/
     ```
     - Similarly for media files:
     ```text
     URL: /media/
-    Directory: /home/yourusername/django-e-comm/media/
+    Directory: /home/yourusername/Django-E-comm/media/
     ```
 
 ### Step 8: Create a Superuser (Optional)
@@ -208,6 +208,7 @@ django-e-comm/                  # Root directory of the project
 ### Step 9: Visit Your Site
 1. Once everything is set up, go to your **PythonAnywhere web app URL** (e.g., `https://rushimithagare.pythonanywhere.com/`).
 2. You should now see your Django E-Commerce application live!
+3. Here is the live demo [https://rushimithagare.pythonanywhere.com/](https://rushimithagare.pythonanywhere.com/)
 
 
 
