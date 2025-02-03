@@ -221,6 +221,7 @@ Django-E-comm/                  # Root directory of the project
 
 
 
+
 **git commands** 
 ```
 git init
