@@ -214,20 +214,8 @@ Django-E-comm/                  # Root directory of the project
 
 
 
+# Contributors 
+@[RenukaGundre](https://github.com/renukagundre)  
+@[RushikeshMithagare](https://github.com/vaibhavxom/)
 
-
-
-
-
-
-
-
-**git commands** 
-```
-git init
- git status
- git add -A
- git commit -m 
- git status
- git push origin main || git push -f
-```
+#
