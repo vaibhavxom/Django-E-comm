@@ -2,77 +2,135 @@
 
 {% block content%}
 
-                <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Checkout</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Review your order</p>
-                </div>
-            </div>
-        </header>
+    <style>
+        :root {
+            --light-blue: hsla(0, 0%, 10%, 0.852);
+            --bright-blue: hsl(245, 75%, 52%);
+            --pale-blue: hsl(225, 100%, 98%);
+            --desaturated-blue: hsl(224, 23%, 55%);
+            --dark-blue: hsl(223, 47%, 23%);
+        }
 
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            background-color: var(--light-blue);
+            background-image: url("./images/pattern-background-desktop.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 100%;
+            background-position: top;
+        }
 
-        <br/>
-    <main>
-        <article>
-            <br/><br/>
-            <div class="grid text-center d-flex justify-content-center vh-10 ">
-    
-            <div class="md-col-6 offset md-3">
+        .pay {
+            background-color: var(--bright-blue);
+            color: rgb(52, 50, 50);
+            border: none;
+            border-radius: 10px;
+            height: 46px;
+            cursor: pointer;
+            padding: 0 20px; /* Add some horizontal padding */
+        }
+
+        .cancel {
+            color: var(--desaturated-blue);
+            border: none;
+            border-radius: 10px;
+            height: 46px;
+            cursor: pointer;
+        }
+
+        .order-summary-container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(27, 24, 24);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-image-header img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .plan-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .price {
+            display: flex;
+            align-items: center;
+        }
+
+        .price img {
+            margin-right: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center buttons horizontally */
+            justify-content: center; /* Center buttons vertically */
+            margin-top: 20px; /* Add some space above the buttons */
+        }
+
+        .total {
+            margin: 20px 0; /* Add some space around the total */
+        }
+    </style>
+<body>
+    <main class="red-hat-display-regular">
+        <div class="order-summary-container">
+            <div class="order-image-header">
             
-                <div class="card">
-                    <div class="card-header">
-                      Order Summary
+            </div>
+            <div class="order-details-container">
+                <h1 class="red-hat-display-bold">Order Summary</h1>
+                <p class="summary">
+                    You can now listen to millions of songs, audiobooks, and podcasts on any device anywhere you like!
+                </p>
+                {% for product in cart_products %}
+                <div class="plan-container">
+                    <div class="price">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded-start" width="100" alt="product image" />
+                        <div>
+                            <h5 class="red-hat-display-bold">{{ product.name }}</h5>
+                            <p>
+                                {% if product.is_sale %}
+                                    {{ product.sale_price }}
+                                {% else %}
+                                    {{ product.price }}
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                     {% for product in cart_products %}
-                        
-                     {{product.name}}:
-                     <br/>
-                        {% if product.is_sale%}
-                        
-                        {{product.sale_price}}  
-                        
-                        {%else%}
-                        
-                        {{product.price}}
-                        
-                        {%endif%}
-                        <br/><br/>
-                        <small>
-
-                        {%for key, value in quantities.items %}
-                        
-                        {%if key == product.id|slugify %}
-                        
-                       Guests :  {{ value  }}
-                        
-                        {%endif%}
+                    {% for key, value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                            Guests: {{ value }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <small>
                     
-                        {%endfor%}
-                    </small>
-                        <br/><br/>
-
-                     {%endfor%}
-                     Total = {{total}}
-                    </div>
-                  </div>
-
-
-                  <A href="{% url 'payment_success'%}" class="btn btn-secondary">checkout </A>
-
+                </small>
+                {% endfor %}
+                <div class="total">
+                    <h5 class="red-hat-display-bold">Total: {{ total }}</h5>
+                </div>
+                
             </div>
-
-            </div>
-
-
-        </article>
-    </main>
+            <center>
+                <div class="button-container">
+                    <a href="{% url 'payment_success' %}" class="pay">Proceed to Payment</a>
+                </div>
+                </center>
+        </div>
         
-        <br/><br/><br/><br/><br/><br/><br/>
+    </main>
+</body>
 
-
-
-{% endblock %}
-  
+{% endblock%}
