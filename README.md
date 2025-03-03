@@ -1,100 +1,121 @@
 # Django E-Commerce Project
 
+![Build Status](https://img.shields.io/github/actions/workflow/status/vaibhavxom/Django-E-comm/main.yml?branch=main) ![Python Version](https://img.shields.io/badge/python-3.x-blue)  
+![Issues](https://img.shields.io/github/issues/vaibhavxom/Django-E-comm)
+![Last Commit](https://img.shields.io/github/last-commit/vaibhavxom/Django-E-comm)
+![License](https://img.shields.io/github/license/vaibhavxom/Django-E-comm)
+
+---
+
+
 ## Overview
 
 This is a simple Django-based e-commerce application that allows users to browse products, add them to their cart, and proceed with the checkout process. The project demonstrates essential e-commerce features such as product management, user authentication, and order management.
-
+---
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Admin Panel](#admin-panel)
+- [Project Structure](#project-structure)
+- [CI/CD Workflow](#cicd-workflow)
+- [Deploying to PythonAnywhere](#deploying-to-pythonanywhere)
+- [Future Improvements](#future-improvements)
+- [Contributors](#contributors)
+---
 ## Features
-
 - User Registration and Authentication
 - Product Listing and Filtering
 - Shopping Cart with Add/Remove Items
 - Checkout and Order Management
 - Admin Panel for Managing Products and Orders
 - User Profiles for Order History and Personalization
-
+---
 ## Technologies Used
-
-- **Django**: Web framework used for backend development.
-- **Python**: Programming language for backend logic.
-- **SQLite**: Database (default) used for development purposes.
-- **HTML/CSS/JS**: Frontend technologies for rendering the user interface.
-- **Bootstrap**: CSS framework for responsive design.
-
+- **Django**
+- **Python**
+- **SQLite**
+- **HTML/CSS/JS**
+- **Bootstrap**
+---
 ## Prerequisites
-
-Make sure you have the following installed:
-
 - Python (>= 3.6)
 - pip (Python package installer)
 - Django (>= 3.0)
-- SQLite (or another database of your choice)
-
+---
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/vaibhavxom/Django-E-comm.git
+    $ git clone https://github.com/vaibhavxom/Django-E-comm.git
     cd Django-E-comm
     ```
 
-2. Create a virtual environment (optional but recommended):
+2. Create a virtual environment:
     ```bash
-    python -m venv venv
+    $ python -m venv venv
     ```
 
 3. Activate the virtual environment:
     - On Windows:
       ```bash
-      venv\Scripts\activate
+      $ venv\Scripts\activate
       ```
     - On macOS/Linux:
       ```bash
-      source venv/bin/activate
+      $ source venv/bin/activate
       ```
 
 4. Install dependencies:
     ```bash
-    pip install -r requirements.txt
+    $ pip install -r requirements.txt
     ```
 
 5. Apply migrations:
     ```bash
-    python manage.py migrate
+    $ python manage.py migrate
     ```
 
-6. Create a superuser to access the Django admin panel:
+6. Create a superuser:
     ```bash
-    python manage.py createsuperuser
+    $ python manage.py createsuperuser
     ```
-7. Create admin css file:
+
+7. Collect static files:
     ```bash
-    python manage.py collectstatic
+    $ python manage.py collectstatic
     ```
+
 8. Run the development server:
     ```bash
-    python manage.py runserver
+    $ python manage.py runserver
     ```
 
-
-
-Now, you can access the application at `http://127.0.0.1:8000/`.
-
+Access the application at `http://127.0.0.1:8000/`.
+---
 ## Usage
-
-- **User Registration & Login**: Navigate to the registration or login page to create an account or sign in.
-- **Product Browsing**: View available products by browsing through the categories or using the search bar.
-- **Add to Cart**: Click on the "Add to Cart" button on product pages to add items to your cart.
-- **Checkout**: Proceed to checkout from the cart page to complete your order.
-
+- **User Registration & Login:** Create an account or sign in.
+- **Product Browsing:** View products by browsing categories or using the search bar.
+- **Add to Cart:** Click on "Add to Cart" on product pages.
+- **Checkout:** Proceed to checkout from the cart page.
+---
 ## Admin Panel
-
-To manage products and view orders, log in to the Django admin panel at:
-**`http://127.0.0.1:8000/admin`**
-
+Access the admin panel at: **`http://127.0.0.1:8000/admin`**
+---
 ## Project Structure
+
 Django-E-comm/                  # Root directory of the project
 ```
+├── cart
+├── media/
+│   ├── uploads/
+│   ├── product
+├── payment
+├── static
+├── staticfiles
+├── tour_pacage_booking
 ├── ecom/                   # Main Django app for the e-commerce functionality
 │   ├── migrations/              # Directory for database migration files
 │   ├── models.py                # Contains database models for products, orders, etc.
@@ -108,53 +129,89 @@ Django-E-comm/                  # Root directory of the project
 └── db.sqlite3                   # The SQLite database (default database for Django during development)
 ```
 
+---
+## CI/CD Workflow
+
+## GitHub Actions
+This project uses **GitHub Actions** for CI/CD. The workflow is triggered on every push to the `main` branch.
+
+**GitHub Actions Configuration (`.github/workflows/deploy.yml`):**
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Tests
+        run: |
+          python manage.py test
+```
+---
 ## Deploying to PythonAnywhere
 
-### Step 1: Create an Account on PythonAnywhere
+## Step 1: Create an Account on PythonAnywhere
 - Go to [PythonAnywhere](https://www.pythonanywhere.com/) and sign up for a free or paid account.
 - Once signed up, log in to your dashboard.
 
-### Step 2: Set Up a New Web App on PythonAnywhere
+## Step 2: Set Up a New Web App on PythonAnywhere
 1. In the PythonAnywhere dashboard, click on the **"Web"** tab.
 2. Click on **"Add a new web app"**.
 3. Choose the option **"Manual configuration"**.
 4. Select **"Python 3.x"** for the Python version.
 5. Select the option **"Django"** for the framework.
 6. Click **"Next"** and PythonAnywhere will set up the necessary files for you.
-
-### Step 3: Clone Your Django Project to PythonAnywhere
+  
+## Step 3: Clone Your Django Project to PythonAnywhere
 1. In the **"Files"** tab on PythonAnywhere, create a new directory to hold your Django project.
 2. Open a **Bash console** from the dashboard (or the **"Consoles"** tab).
 3. In the bash console, clone your repository:
     ```bash
-    git clone https://github.com/vaibhavxom/Django-E-comm.git
+    $ git clone https://github.com/vaibhavxom/Django-E-comm.git
     ```
 4. Navigate to the project directory:
     ```bash
-    cd Django-E-comm
+    $ cd Django-E-comm
     ```
 
-### Step 4: Set Up a Virtual Environment
+## Step 4: Set Up a Virtual Environment
 1. Create a virtual environment in your project folder:
     ```bash
-    python3 -m venv myenv
+    $ python3 -m venv myenv
     ```
 2. Activate the virtual environment:
     ```bash
-    source myenv/bin/activate
+    $ source myenv/bin/activate
     ```
 3. Install the required dependencies:
     ```bash
-    pip install -r requirements.txt
+    $ pip install -r requirements.txt
     ```
 
-### Step 5: Configure Database
+## Step 5: Configure Database
 1. In the bash console, run Django migrations to set up the database:
     ```bash
-    python manage.py migrate
+    $ python manage.py migrate
     ```
 
-### Step 6: Configure Static and Media Files
+## Step 6: Configure Static and Media Files
 1. Ensure that the static files and media files are configured correctly:
     - In `settings.py`, set up static and media directories:
     ```python
@@ -165,10 +222,10 @@ Django-E-comm/                  # Root directory of the project
     ```
 2. Run the `collectstatic` command to gather static files:
     ```bash
-    python manage.py collectstatic
+    $ python manage.py collectstatic
     ```
 
-### Step 7: Update PythonAnywhere Web App Settings
+## Step 7: Update PythonAnywhere Web App Settings
 1. Go to the **"Web"** tab on PythonAnywhere and click on the web app you created.
 2. Under **"Source code"**, set the path to your project folder (e.g., `/home/yourusername/Django-E-comm`).
 3. Under **"Virtualenv"**, set the path to your virtual environment (e.g., `/home/yourusername/Django-E-comm/myenv`).
@@ -199,23 +256,28 @@ Django-E-comm/                  # Root directory of the project
     Directory: /home/yourusername/Django-E-comm/media/
     ```
 
-### Step 8: Create a Superuser (Optional)
+## Step 8: Create a Superuser (Optional)
 1. You can create a superuser to access the admin panel:
     ```bash
-    python manage.py createsuperuser
+    $ python manage.py createsuperuser
     ```
 
-### Step 9: Visit Your Site
+## Step 9: Visit Your Site 🔗
 1. Once everything is set up, go to your **PythonAnywhere web app URL** (e.g., `https://rushimithagare.pythonanywhere.com/`).
 2. You should now see your Django E-Commerce application live!
-3. Here is the live demo [https://rushimithagare.pythonanywhere.com/](https://rushimithagare.pythonanywhere.com/)
+3. Here is the 🚀 **Live Demo:** [Visit Here](https://rushimithagare.pythonanywhere.com/)
 
-
-
-
-
-# Contributors 
-@[RenukaGundre](https://github.com/renukagundre)  
-@[RushikeshMithagare](https://github.com/vaibhavxom/)
-
+---
+## Future Improvements 🚀  
+- [ ] **Payment Gateway Integration**  
+- [ ] **Product Reviews and Ratings**  
+- [ ] **Search and Filters for Products**  
+- [ ] **Enhanced Security Practices**  
+---  
+## Contributors 🤝
+- @[RenukaGundre](https://github.com/renukagundre) - **Frontend Development, UI/UX Design** 
+- @[RushikeshMithagare](https://github.com/vaibhavxom/)  - **Backend Development, Database Design, CI/CD Automation**
+ 
+  <!--  [![Contributors](https://contrib.rocks/image?repo=vaibhavxom/Django-E-comm)](https://github.com/vaibhavxom/Django-E-comm/graphs/contributors) -->
+---
 #
