@@ -29,5 +29,23 @@ jobs:
     - name: Run migrations
       run: |
         python manage.py migrate
-
-   
+    
+    - name: Install sshpass
+      run: sudo apt-get install sshpass
+    
+    - name: Deploy to PythonAnywhere
+      env:
+        PA_USERNAME: ${{ secrets.PA_USERNAME }}
+        PA_PASSWORD: ${{ secrets.PA_PASSWORD }}
+        
+      run: |
+        echo "Deploying to PythonAnywhere..."
+        sshpass -p "$PA_PASSWORD" ssh -o StrictHostKeyChecking=no "$PA_USERNAME@ssh.pythonanywhere.com" << 'EOF'
+          cd /home/rushiMithagare/Django-E-comm  # Your project directory
+          git pull origin main  # Pull the latest changes
+          source /home/rushiMithagare/.virtualenvs/myvirtualenv/bin/activate  # Activate your virtual environment
+          pip install -r requirements.txt  # Install any new dependencies
+          python manage.py migrate  # Run migrations
+          python manage.py collectstatic --noinput  # Collect static files
+          touch /var/www/rushimithagare_pythonanywhere_com_wsgi.py  # Touch the WSGI file to restart the web app
+        EOF
