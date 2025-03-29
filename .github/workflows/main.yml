@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12'  # Specify your Python version
+        python-version: '3.10'  # Use the Python version specified in your PythonAnywhere configuration
 
     - name: Install dependencies
       run: |
@@ -30,4 +30,19 @@ jobs:
       run: |
         python manage.py migrate
 
-   
+    # Deployment step commented out
+    # - name: Deploy to PythonAnywhere
+    #   env:
+    #     PA_USERNAME: ${{ secrets.PA_USERNAME }}
+    #     PA_PASSWORD: ${{ secrets.PA_PASSWORD }}
+    #   run: |
+    #     echo "Deploying to PythonAnywhere..."
+    #     sshpass -p "$PA_PASSWORD" ssh -o StrictHostKeyChecking=no "$PA_USERNAME@ssh.pythonanywhere.com" << 'EOF'
+    #       cd /home/rushiMithagare/Django-E-comm  # Your project directory
+    #       git pull origin main  # Pull the latest changes
+    #       source /home/rushiMithagare/.virtualenvs/myvirtualenv/bin/activate  # Activate your virtual environment
+    #       pip install -r requirements.txt  # Install any new dependencies
+    #       python manage.py migrate  # Run migrations
+    #       python manage.py collectstatic --noinput  # Collect static files
+    #       touch /var/www/rushimithagare_pythonanywhere_com_wsgi.py  # Touch the WSGI file to restart the web app
+    #     EOF
